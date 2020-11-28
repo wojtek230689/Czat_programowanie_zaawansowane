@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+
 
 namespace PROJEKT
 {
@@ -58,14 +60,14 @@ namespace PROJEKT
             {
                 Console.Clear();
 
-                Console.WriteLine("User:");
+                Console.WriteLine("Menu:");
 
                 int i = 1;
 
-                foreach (Pacjent admin in (Pacjent[])Enum.GetValues(typeof(Pacjent)))
+                foreach (Pacjent user in (Pacjent[])Enum.GetValues(typeof(Pacjent)))
                 {
                     Console.Write($"[{i++}]. ");
-                    Console.WriteLine(String.Concat(admin.ToString().Replace('_', ' ')));
+                    Console.WriteLine(String.Concat(user.ToString().Replace('_', ' ')));
                 }
 
                 Pacjent start;
@@ -77,6 +79,8 @@ namespace PROJEKT
                 if (!AdminConfirmed)
                 {
                     Console.WriteLine("Wybrałeś niepoprawną opcję");
+                    Thread.Sleep(1000);
+
                 }
 
                 switch (start)
@@ -90,6 +94,7 @@ namespace PROJEKT
                     case Pacjent.Obecne_obostrzenia:
                         break;
                     case Pacjent.Wyjdź:
+                        k = false;
                         break;
                 }
             }
