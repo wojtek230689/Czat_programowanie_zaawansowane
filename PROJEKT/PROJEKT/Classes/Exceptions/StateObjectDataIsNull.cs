@@ -6,8 +6,7 @@ namespace PROJEKT.Classes.Exceptions
 {
     public class StateObjectDataIsNull : Exception
     {
-        public StateObjectDataIsNull() :
-            base("Referencja do danych ma wartość null!")
+        public StateObjectDataIsNull() : base("Referencja do danych ma wartość null!")
         {
 
         }

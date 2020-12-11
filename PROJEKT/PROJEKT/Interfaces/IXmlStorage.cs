@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PROJEKT.Interfaces
 {
-     public interface ISerializaer
+    public interface IXmlStorage
     {
         bool FromXml(Stream Stream);
         MemoryStream ToXml();

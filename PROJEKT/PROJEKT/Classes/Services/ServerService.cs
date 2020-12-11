@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-
 using static PROJEKT.Interfaces.INetworkAction;
 
 namespace PROJEKT.Classes.Services
@@ -12,18 +11,18 @@ namespace PROJEKT.Classes.Services
     {
         private readonly TcpListener    m_oNetObject;
 
-        private readonly List<T>        m_oConnectedClients;
+        private readonly List<T>        m_oConnectedClient;
 
-        public ServerService(IPAddress Address, int Port) : base(ModeEnum.Server,Address,Port)
+        public override bool IsConnected => m_oNetObject?.Server?.Connected ?? false;
+
+        public override Socket NetworkSocket => m_oNetObject?.Server ?? null; 
+
+        public ServerService(IPAddress a_oIPAddress, int a_iPort) : base(ModeEnum.Server,a_oIPAddress,a_iPort)
         {
             m_oNetObject = new TcpListener(Address, Port);
 
-            m_oConnectedClients = new List<T>();
+            m_oConnectedClient = new List<T>();
         }
-
-        public override bool IsConnected => (m_oNetObject?.Server?.Connected ?? false);
-
-        public override Socket NetworkSocket => (m_oNetObject?.Server ?? null);
 
         public override void Establish()
         {
@@ -42,7 +41,7 @@ namespace PROJEKT.Classes.Services
             {
             }
 
-            NetworkAction?.StateChanged(State.Error,new StateObject(this));
+            NetworkAction?.StateChanged(State.Error, new StateObject(this));
         }
 
         protected virtual void AcceptConnection()
@@ -51,12 +50,12 @@ namespace PROJEKT.Classes.Services
             {
                 NetworkAction?.StateChanged(State.Listening, new StateObject(this));
 
-                m_oNetObject?.BeginAcceptTcpClient(new AsyncCallback(AcceptCallback), this);                
+                m_oNetObject?.BeginAcceptTcpClient(new AsyncCallback(AcceptCallback), this);
             }
             catch (Exception e)
             {
-                NetworkAction?.StateChanged(State.Error, new StateObject(this,e));
-            }            
+                NetworkAction?.StateChanged(State.Error, new StateObject(this, e));
+            }
         }
 
         protected virtual void AcceptCallback(IAsyncResult ar)
@@ -65,20 +64,19 @@ namespace PROJEKT.Classes.Services
 
             try
             {
-                var _client = (T)Activator.CreateInstance(typeof(T), new object[] 
-                { 
-                    _obj.NetworkSocket.EndAccept(ar), 
-                    NetworkService.BUFFER_SIZE 
+                T _client = (T)Activator.CreateInstance(typeof(T), new object[]
+                {
+                     _obj.NetworkSocket.EndAccept(ar),
+                     NetworkService.BUFFER_SIZE
                 });
 
                 _client.NetworkAction = _obj.NetworkAction;
                 _client.RegisteredServer = _obj;
+                _obj.m_oConnectedClient.Add(_client);
 
-                _obj?.m_oConnectedClients?.Add(_client);
+                _obj.NetworkAction.StateChanged(State.Established, new StateObject(_obj, _client));
 
-                _obj?.NetworkAction?.StateChanged(State.Established, new StateObject(this,_client));
-
-                _obj?.AcceptConnection();
+                _obj.AcceptConnection();
 
                 return;
             }
@@ -86,31 +84,32 @@ namespace PROJEKT.Classes.Services
             {
             }
 
-            _obj?.NetworkAction?.StateChanged(State.Error,new StateObject(this));
+            _obj?.NetworkAction?.StateChanged(State.Error, new StateObject(_obj));
         }
 
         public List<T> ConnectedClients
         {
             get
             {
-                m_oConnectedClients.RemoveAll((x) =>
-                {
-                    try
-                    {
-                        return !x.IsConnected;
-                    }
-                    catch (Exception)
-                    {
-                        return true;
-                    }
-                });
+                m_oConnectedClient.RemoveAll((x) =>
+               {
+                   try
+                   {
+                       return !x.IsConnected;
+                   }
+                   catch (Exception)
+                   {
+                   }
 
-                return m_oConnectedClients;
+                   return true;
+               });
+                
+                return m_oConnectedClient;
             }
-        }        
+        }
         public T GetClientByIdentifier(string a_sIdentifier) => ConnectedClients.Find(x => x.Identifier == a_sIdentifier);
 
-        public virtual void AsyncSendBroadcast(NetworkData a_oData,T a_oSender = null)
+        public virtual void AsyncSendBroadcast(NetworkData a_oData, T a_oSender = null)
         {
             foreach (var _oClient in ConnectedClients)
             {

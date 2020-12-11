@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-
 using static PROJEKT.Interfaces.INetworkAction;
 
 namespace PROJEKT.Classes.Services
@@ -11,25 +10,22 @@ namespace PROJEKT.Classes.Services
     public class ClientService : NetworkService
     {
         private readonly TcpClient m_oNetObject;
+        public override bool IsConnected => (m_oNetObject?.Client?.Connected ?? false);
+        public override Socket NetworkSocket => m_oNetObject?.Client ?? null;
 
-        public ClientService(Socket a_oSocket, int a_iBufferLength = 100000) :
-            base(ModeEnum.Client, a_iBufferLength)
+        public ClientService(IPAddress a_oIPAddress, int a_iPort) : base(ModeEnum.Client,a_oIPAddress,a_iPort)
+        {
+            m_oNetObject = new TcpClient();
+        }
+
+        public ClientService(Socket a_oSocket, int a_iBufferLength = NetworkService.BUFFER_SIZE) 
+            : base(ModeEnum.Client, a_iBufferLength)
         {
             m_oNetObject = new TcpClient
             {
                 Client = a_oSocket
             };
-
         }
-
-        public ClientService(IPAddress Address,int Port,int a_iBufferLength = 100000) : 
-            base(ModeEnum.Client, Address, Port, a_iBufferLength)
-        {
-            m_oNetObject = new TcpClient();
-        }
-        public override bool IsConnected => (m_oNetObject?.Client?.Connected ?? false);
-
-        public override Socket NetworkSocket => m_oNetObject?.Client ?? null;
 
         public override void Establish()
         {
@@ -48,7 +44,7 @@ namespace PROJEKT.Classes.Services
             {
             }
 
-            NetworkAction?.StateChanged(State.Error,new StateObject(this));
+            NetworkAction?.StateChanged(State.Error, new StateObject(this));
         }
 
         protected virtual void ConnectCallback(IAsyncResult ar)
@@ -57,9 +53,9 @@ namespace PROJEKT.Classes.Services
 
             try
             {
-                _obj.NetworkSocket.EndConnect(ar);
+                _obj?.NetworkSocket?.EndConnect(ar);
 
-                _obj?.NetworkAction?.StateChanged(State.Connected, new StateObject(this));
+                _obj?.NetworkAction?.StateChanged(State.Connected, new StateObject(_obj));
 
                 return;
             }
@@ -67,9 +63,8 @@ namespace PROJEKT.Classes.Services
             {
             }
 
-            _obj?.NetworkAction?.StateChanged(State.Error,new StateObject(this));
+            _obj?.NetworkAction?.StateChanged(State.Error, new StateObject(_obj));
         }
 
-      
     }
 }
