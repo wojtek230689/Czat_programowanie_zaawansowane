@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 using PROJEKT.Classes.Exceptions;
@@ -12,6 +13,7 @@ namespace PROJEKT.Classes
     public sealed class MessageFactory
     {
         public static readonly MessageFactory Instance = new MessageFactory();
+
         private readonly Dictionary<string, Type> m_oMessages;
 
         private MessageFactory()
@@ -20,21 +22,17 @@ namespace PROJEKT.Classes
         }
         public void Register<T>() where T : class
         {
-            Type _oType = typeof(T);
+            Type _Type = typeof(T);
+            string _sTypeName = _Type.Name;
 
-            string _sTypeName = _oType.Name;
-
-            if (!_oType.GetInterfaces().ToArray().Contains(typeof(IMessage)))
-            {
-                throw new MessageFactoryIfaceNotFound(_sTypeName, "IMessage");
-            }
+            if (!(_Type.GetInterfaces()?.ToArray()?.Contains(typeof(IMessage)) ?? false))
+                throw new MessageFactoryIfaceNotFound(_sTypeName);
 
             if (!m_oMessages.ContainsKey(_sTypeName))
             {
-                m_oMessages.Add(_sTypeName, _oType);
-            }            
+                m_oMessages.Add(_sTypeName, _Type);
+            }
         }
-
         public T Create<T>(string a_sTypeName) where T : class
         {
             if (m_oMessages.ContainsKey(a_sTypeName))
@@ -44,21 +42,31 @@ namespace PROJEKT.Classes
             throw new MessageFactoryTypeNotFound(a_sTypeName);
         }
 
-        public dynamic Create(string a_sTypeName) => Create<dynamic>(a_sTypeName); 
+        public dynamic Create(string a_sTypeName) => Create<dynamic>(a_sTypeName);
+
+        public dynamic Create(NetworkData a_oNetData)
+        {
+            if ((a_oNetData?.DataLength() ?? 0) < 1)
+                throw new NetworkDataBufferIsEmpty("Dane telegramu\n");
+
+            var _oByteData = a_oNetData.Buffer.Take(a_oNetData.DataLength()).ToArray();
+
+            return Create(_oByteData);
+        }
 
         public dynamic Create(byte[] a_oData)
         {
-            var _oXml = XmlReader.Create(new MemoryStream(a_oData));
+            using var _oXmlReader = XmlReader.Create(new MemoryStream(a_oData));
 
-            _oXml.Read();
+            _oXmlReader.Read();
 
-            string _sTypeName = _oXml.Name;
+            string _sTypeName = _oXmlReader.Name;
 
-            var _oMsg = Create<IXmlStorage>(_sTypeName);
+            var _oMessage = Create<IXmlStorage>(_sTypeName);
 
-            _oMsg.FromXml(new MemoryStream(a_oData));
+            _oMessage.FromXml(new MemoryStream(a_oData));
 
-            return _oMsg;
+            return _oMessage;
         }
     }
 }

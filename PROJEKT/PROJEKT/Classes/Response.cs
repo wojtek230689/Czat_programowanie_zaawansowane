@@ -21,7 +21,7 @@ namespace PROJEKT.Classes
 
         public override string ToString()
         {
-            return $"[Kod={Code}|Obiekt={Object}]";
+            return $"[Kod={Code}\n|Obiekt={Object}]";
         }
     }
 }

@@ -7,8 +7,9 @@ namespace PROJEKT.Interfaces
 {
     public interface IMessage
     {
-        IMessage ProcessRequest(StateObject a_oObject = null);
-        IMessage ProcessResponse(StateObject a_oObject = null);
+        IMessage ProcessRequest(StateObject Object = null);
+        IMessage ProcessResponse(StateObject Object = null);
+
         NetworkData AsNetworkData(int a_iDataSize = NetworkService.BUFFER_SIZE);
     }
 }

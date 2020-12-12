@@ -31,10 +31,15 @@ namespace PROJEKT
 
                 int.TryParse(args[0], out _iMode);
 
+                XmlStorageTypes.Register<Exception>();
+
+                MessageFactory.Instance.Register<LoginMessage>();
+                MessageFactory.Instance.Register<TextMessage>();
+
                 switch (_iMode)
                 {
                     case 1:
-                        new TestServer().Run();  break;
+                        new TestServer().Run(); break;
 
                     case 2:
                         new TestClient().Run(); break;

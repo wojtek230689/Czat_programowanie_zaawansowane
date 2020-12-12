@@ -66,7 +66,7 @@ namespace PROJEKT.Classes.Messages
         }
         public override string ToString()
         {
-            return $"Od:{From}|Do:{To}|Wiadomosc={Text}";
+            return $"Od:{From}\n|Do:{To}\n|Wiadomosc={Text}";
         }
     }
 }

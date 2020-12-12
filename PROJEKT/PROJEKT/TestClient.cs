@@ -68,7 +68,7 @@ namespace PROJEKT
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Wystąpił błąd! {e.Message}");
+                Console.WriteLine($"Wystąpił błąd! {e.Message}\n");
             }
 
             _client.AsyncReceive();
@@ -78,7 +78,7 @@ namespace PROJEKT
         {
             var _client = a_oStateObj.GetObject<ClientService>();
 
-            Console.Write("Podaj login:");
+            Console.Write("Podaj login:\n");
 
             var _loginTelegram = new LoginMessage
             {
