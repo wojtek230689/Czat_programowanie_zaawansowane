@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
+using System.Runtime.Serialization;
 using PROJEKT.Interfaces;
 
 namespace PROJEKT.Classes
@@ -30,7 +31,7 @@ namespace PROJEKT.Classes
         [IgnoreDataMember]
         public T BaseObject { get; protected set; }
 
-        public virtual MemoryStream ToXml()
+        public virtual MemoryStream ToXml(string plik)
         {
             DataContractSerializer _oSerializer = new DataContractSerializer(typeof(T), XmlStorageTypes.GetArray());
 
@@ -40,14 +41,24 @@ namespace PROJEKT.Classes
             
             _oSerializer.WriteObject(_oWriter, this);
 
-            using var _oTextStrem = new FileStream("plik.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            ToFile(_oStream, plik);
+
+            return _oStream;
+        }
+
+        public virtual FileStream ToFile(Stream a_oStream, string plik)
+        {
+            DataContractSerializer _oSerializer = new DataContractSerializer(typeof(T), XmlStorageTypes.GetArray());
+
+
+            using var _oTextStrem = new FileStream(plik, FileMode.Append, FileAccess.Write);
 
             using var _oTextWriter = XmlDictionaryWriter.CreateTextWriter(_oTextStrem, Encoding.UTF8);
 
             _oSerializer.WriteObject(_oTextWriter, this);
 
+            return _oTextStrem;
 
-            return _oStream;
         }
 
         public virtual bool FromXml(Stream a_oStream)
@@ -56,8 +67,29 @@ namespace PROJEKT.Classes
 
             using var _oReader = XmlDictionaryReader.CreateTextReader(a_oStream, new XmlDictionaryReaderQuotas());
 
+
             return InitializeFromObject((T)_oSerializer.ReadObject(_oReader, false));
         }
+
+        public virtual bool FromFile(string filName)
+        {
+            DataContractSerializer _oSerializer = new DataContractSerializer(typeof(T), XmlStorageTypes.GetArray());
+
+            MemoryStream ms = new MemoryStream();
+            using (FileStream fs = File.OpenRead(filName))
+            {
+                fs.CopyTo(ms);
+            }
+
+            using var _oReader = XmlDictionaryReader.CreateTextReader(ms, new XmlDictionaryReaderQuotas());
+
+
+
+            return InitializeFromObject((T)_oSerializer.ReadObject(_oReader, false));
+        }
+
+
+
 
         public abstract bool InitializeFromObject(T Object); 
     }

@@ -20,6 +20,8 @@ namespace PROJEKT
 
         public ClientService Client;
 
+        
+
         public bool StillWorking = true;
 
         public void StateChanged(State a_eState, StateObject a_oStateObj = null)
@@ -95,6 +97,7 @@ namespace PROJEKT
             Console.WriteLine("1 - zaloguj");
             Console.WriteLine("2 - wyślij wiadomość do wszystkich");
             Console.WriteLine("3 - wyślij wiadomość do użytkownika");
+            Console.WriteLine("4 - wczytaj plik");
             Console.WriteLine("0 - wyjdź");
             Console.WriteLine();
         }
@@ -121,6 +124,14 @@ namespace PROJEKT
             };
 
             Client.AsyncSend(_msgTo.AsNetworkData());
+        }
+
+        public void ReadFile()
+        {
+            TextMessage text = new TextMessage();
+
+            text.reader();
+
         }
 
         public virtual void Run()
@@ -152,6 +163,10 @@ namespace PROJEKT
 
                         case ConsoleKey.D3:
                             SendMessage(false);
+                            break;
+                        case ConsoleKey.D4:
+
+                            ReadFile();
                             break;
 
                     }

@@ -8,6 +8,6 @@ namespace PROJEKT.Interfaces
     public interface IXmlStorage
     {
         bool FromXml(Stream Stream);
-        MemoryStream ToXml();
+        MemoryStream ToXml(string plik);
     }
 }

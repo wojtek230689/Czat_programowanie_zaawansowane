@@ -18,6 +18,8 @@ namespace PROJEKT
             XmlStorageTypes.Register<Response>();
 
             MessageFactory.Instance.Register<LoginMessage>();
+            MessageFactory.Instance.Register<TextMessage>();
+
 
             Console.Clear();
 

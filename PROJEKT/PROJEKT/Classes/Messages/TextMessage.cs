@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Xml;
 using PROJEKT.Classes.Services;
 using PROJEKT.Interfaces;
 
@@ -59,10 +61,27 @@ namespace PROJEKT.Classes.Messages
         }
         public NetworkData AsNetworkData(int a_iBufferSize = NetworkService.BUFFER_SIZE)
         {
-            return new NetworkData(a_iBufferSize)
-            {
-                Buffer = ToXml().ToArray()
-            };
+            
+                return new NetworkData(a_iBufferSize)
+                {
+                    Buffer = ToXml("czat.xml").ToArray()
+                };
+            
+           
+        }
+
+
+        public void reader()
+        {
+
+
+
+            Console.WriteLine("Rozpoczęto wczytywanie");
+
+
+            FromFile("plik.txt");
+
+            Console.WriteLine("zakończono wczytywanie");
         }
         public override string ToString()
         {

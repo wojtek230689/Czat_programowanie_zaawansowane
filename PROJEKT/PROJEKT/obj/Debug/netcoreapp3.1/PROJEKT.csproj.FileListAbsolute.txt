@@ -37,3 +37,16 @@ C:\Users\wojtek\Desktop\projekt programowanie zaaawansowan\Czat_programowanie_za
 C:\Users\wojtek\Desktop\projekt programowanie zaaawansowan\Czat_programowanie_zaawansowane\v1.0\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.dll
 C:\Users\wojtek\Desktop\projekt programowanie zaaawansowan\Czat_programowanie_zaawansowane\v1.0\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.pdb
 C:\Users\wojtek\Desktop\projekt programowanie zaaawansowan\Czat_programowanie_zaawansowane\v1.0\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.genruntimeconfig.cache
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.exe
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.deps.json
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.runtimeconfig.json
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.runtimeconfig.dev.json
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.dll
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.pdb
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.csprojAssemblyReference.cache
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.AssemblyInfoInputs.cache
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.AssemblyInfo.cs
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.csproj.CoreCompileInputs.cache
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.dll
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.pdb
+C:\Users\wojciech.kawlewski\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.genruntimeconfig.cache

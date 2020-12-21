@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
@@ -85,7 +86,8 @@ namespace PROJEKT.Classes.Messages
         {
             return new NetworkData(a_iBufferSize)
             {
-                Buffer = ToXml().ToArray()
+
+            Buffer = ToXml("system.xml").ToArray()
             };
         }
         public override string ToString()
