@@ -41,12 +41,14 @@ namespace PROJEKT.Classes
             
             _oSerializer.WriteObject(_oWriter, this);
 
+
             ToFile(_oStream, plik);
 
             return _oStream;
         }
-
-        public virtual FileStream ToFile(Stream a_oStream, string plik)
+         
+        //do pliku
+        public virtual FileStream ToFile( string plik)
         {
             DataContractSerializer _oSerializer = new DataContractSerializer(typeof(T), XmlStorageTypes.GetArray());
 
@@ -61,6 +63,7 @@ namespace PROJEKT.Classes
 
         }
 
+
         public virtual bool FromXml(Stream a_oStream)
         {
             DataContractSerializer _oSerializer = new DataContractSerializer(typeof(T), XmlStorageTypes.GetArray());
@@ -71,6 +74,7 @@ namespace PROJEKT.Classes
             return InitializeFromObject((T)_oSerializer.ReadObject(_oReader, false));
         }
 
+        //z pliku
         public virtual bool FromFile(string filName)
         {
             DataContractSerializer _oSerializer = new DataContractSerializer(typeof(T), XmlStorageTypes.GetArray());
@@ -83,12 +87,29 @@ namespace PROJEKT.Classes
 
             using var _oReader = XmlDictionaryReader.CreateTextReader(ms, new XmlDictionaryReaderQuotas());
 
-
+           
 
             return InitializeFromObject((T)_oSerializer.ReadObject(_oReader, false));
         }
+     
+
+        /*
+          public virtual bool FromFile(string fileName)
+          {
+              DataContractSerializer _oTextDeSerializer = new DataContractSerializer(typeof(T), XmlStorageTypes.GetArray());
+
+              FileStream _oTextReader = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+              using var _oReader = XmlDictionaryReader.CreateTextReader(_oTextReader, new XmlDictionaryReaderQuotas());
 
 
+
+
+             return InitializeFromObject((T)_oTextDeSerializer.ReadObject(_oReader, false));
+
+
+          }
+       */
 
 
         public abstract bool InitializeFromObject(T Object); 

@@ -79,7 +79,7 @@ namespace PROJEKT.Classes.Messages
             Console.WriteLine("Rozpoczęto wczytywanie");
 
 
-            FromFile("plik.txt");
+            FromFile("czat.xml");
 
             Console.WriteLine("zakończono wczytywanie");
         }
