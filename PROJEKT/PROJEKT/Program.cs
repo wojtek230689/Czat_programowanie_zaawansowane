@@ -18,61 +18,15 @@ namespace PROJEKT
     {
         static void Main(string[] args)
         {
-            
 
+            XmlStorageTypes.Register<Exception>();
+            XmlStorageTypes.Register<StateObject>();
+            XmlStorageTypes.Register<Response>();
 
+            MessageFactory.Instance.Register<LoginMessage>();
+            MessageFactory.Instance.Register<TextMessage>();
 
-            Console.Clear();
-
-
-
-            logowanie logowanie = new logowanie();
-
-            logowanie.Login();
-
-
-            //UserList _oLista = new UserList();
-
-            //if (File.Exists(@"baza_uzytkownikow.xml"))
-            //{
-            //    _oLista.LoadFromXml(@"baza_uzytkownikow.xml");
-            //}
-            //else
-            //{
-            //    _oLista.Add(new User { Login = "jkuzmicz", Password = "test123", Permission = 2 });
-            //    _oLista.Add(new User { Login = "zdyrman", Password = "test123", Permission = 1 });
-            //    _oLista.Add(new User { Login = "rochucki", Password = "test123", Permission = 2 });
-
-            //    _oLista.SaveAsXml(@"baza_uzytkownikow.xml");
-            //}
-
-            //foreach (var _user in _oLista.Collection)
-            //{
-            //    Console.WriteLine(_user);
-            //}
-
-            //XmlStorageTypes.Register<Exception>();
-            //XmlStorageTypes.Register<StateObject>();
-            //XmlStorageTypes.Register<Response>();
-
-            //MessageFactory.Instance.Register<LoginMessage>();
-            //MessageFactory.Instance.Register<TextMessage>();
-
-            //Console.Clear();
-            //var _oUser = User.LoadFromXml(@"user.xml");
-            //Console.WriteLine(_oUser);
-
-
-            //User.Add().SaveAsXml("user.xml");
-
-
-
-            //User.Add().text("user.txt");
-
-
-
-            /*
-
+          
             Console.Clear();
 
             if ((args?.Length ?? 0) < 1)
@@ -99,7 +53,7 @@ namespace PROJEKT
                         new TestClient().Run(); break;
                 }
             }
-            */
+            
         }
     }
 }

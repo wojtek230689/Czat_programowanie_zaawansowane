@@ -6,6 +6,8 @@ using System.Threading;
 using PROJEKT.Classes.Services;
 using PROJEKT.Classes;
 using PROJEKT.Interfaces;
+using PROJEKT.Classes.Business;
+
 
 using static PROJEKT.Interfaces.INetworkAction;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ namespace PROJEKT
 
         public ClientService Client;
 
-        
+        private string _oLogin;
 
         public bool StillWorking = true;
 
@@ -41,8 +43,7 @@ namespace PROJEKT
                         break;
 
                     case State.Connected:
-                        OnConnected(a_oStateObj);
-
+                        polaczenie();
                         break;
 
                     case State.Receiving:                        
@@ -80,24 +81,31 @@ namespace PROJEKT
         {
             var _client = a_oStateObj.GetObject<ClientService>();
 
-            Console.Write("Podaj login:\n");
-
+         
             var _loginTelegram = new LoginMessage
             {
-                Login = Console.ReadLine()
+                Login = _oLogin
             };
 
             _client.AsyncSend(_loginTelegram.AsNetworkData());
 
             OnReceived(_client.SyncReceive());
         }
+
+        public void polaczenie(StateObject a_oStateObj = null)
+        {
+            logowanie _Login = new logowanie();
+            _oLogin = _Login.Login();
+            OnConnected(a_oStateObj);
+        }
+
+
         public virtual void MenuDisplay()
         {
             Console.WriteLine();
             Console.WriteLine("1 - zaloguj");
             Console.WriteLine("2 - wyślij wiadomość do wszystkich");
             Console.WriteLine("3 - wyślij wiadomość do użytkownika");
-            Console.WriteLine("4 - wczytaj plik");
             Console.WriteLine("0 - wyjdź");
             Console.WriteLine();
         }
@@ -126,7 +134,28 @@ namespace PROJEKT
             Client.AsyncSend(_msgTo.AsNetworkData());
         }
 
-       
+        public virtual void SendMessageToDoctor(string kto)
+        {
+            Console.WriteLine("Wprowadz dane:");
+            string _sTo; 
+
+            Console.Write("Do:");
+             _sTo = kto;
+            
+
+            Console.Write("Wiadomosc:");
+            string _sText = Console.ReadLine();
+
+            TextMessage _msgTo = new TextMessage
+            {
+                From = Client.Identifier,
+                To = _sTo,
+                Text = _sText
+            };
+
+            Client.AsyncSend(_msgTo.AsNetworkData());
+        }
+
 
         public virtual void Run()
         {

@@ -17,7 +17,7 @@ namespace PROJEKT.Classes
     class logowanie
     {
 
-        public void Login()
+        public  string Login()
         {
 
             Console.Clear();
@@ -25,78 +25,119 @@ namespace PROJEKT.Classes
             UserList _oLista = new UserList();
 
             User _oUser = new User();
+            Menu menu = new Menu();
 
 
-                _oLista.LoadFromXml(@"baza_uzytkownikow.xml");
-            
+            _oLista.LoadFromXml(@"baza_uzytkownikow.xml");
+
             do
             {
-
-                Console.WriteLine("Podaj login:");
-                _oUser.Login = Console.ReadLine().ToLower();
-
-                if (string.IsNullOrEmpty(_oUser.Login))
-                {
-                    Console.WriteLine("Login nie może być pusty!");
+                Console.WriteLine("Zaloguj się jako:");
+                Console.WriteLine("1 - Lekarz/Administrator.");
+                Console.WriteLine("2 - Pacjent");
+                int _odp;
+                int.TryParse(Console.ReadLine(), out _odp);
 
 
-                }
-                else if (_oLista.Collection.Exists(x => x.Login == _oUser.Login))
+                if (_odp == 1 )
                 {
                     do
                     {
-                        Console.WriteLine("Podaj hasło:");
 
-                        _oUser.Password = Console.ReadLine().ToLower();
+                        Console.WriteLine("Podaj login:");
+                        _oUser.Login = Console.ReadLine().ToLower();
 
-                        if (string.IsNullOrEmpty(_oUser.Password))
+                        if (string.IsNullOrEmpty(_oUser.Login))
                         {
-                            Console.WriteLine("Hasło nie może być puste!");
+                            Console.WriteLine("Login nie może być pusty!");
+
 
                         }
-                        else if (_oLista.Collection.Exists(x => x.Password == _oUser.Password))
+                        else if (_oLista.Collection.Exists(x => x.Login == _oUser.Login))
                         {
-                            if (_oLista.Collection.Exists(x => x.Login == _oUser.Login  && x.Permission == 1))
+                            do
                             {
-                                Console.WriteLine("Zalogowałes się jako Admin");
-                            }
-                            if (_oLista.Collection.Exists(x => x.Login == _oUser.Login && x.Permission == 2))
-                            {
-                                Console.WriteLine("Zalogowałes się jako użytkownik");
+                                Console.WriteLine("Podaj hasło:");
 
-                            }
+                                _oUser.Password = Console.ReadLine().ToLower();
+
+                                if (string.IsNullOrEmpty(_oUser.Password))
+                                {
+                                    Console.WriteLine("Hasło nie może być puste!");
+
+                                }
+                                else if (_oLista.Collection.Exists(x => x.Password == _oUser.Password))
+                                {
+                                    if (_oLista.Collection.Exists(x => x.Login == _oUser.Login && x.Permission == 1))
+                                    {
+
+                                        menu.menuLekarza();
+
+
+                                        return _oUser.Login;
+
+
+                                    }
+                                    if (_oLista.Collection.Exists(x => x.Login == _oUser.Login && x.Permission == 2))
+                                    {
+                                        menu.menuAdmina();
+                                        return _oUser.Login;
+
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Błędne hasło");
+                                    Console.WriteLine("Czy chcesz sie cofnąć (T/N) ?");
+                                    string odp = Console.ReadLine().ToUpper();
+                                    if (odp == "T" || odp == "TAK" || odp == "Y" || odp == "YES")
+                                    {
+                                        break;
+                                    }
+                                }
+                            } while (true);
 
 
                         }
                         else
                         {
-                            Console.WriteLine("Błędne hasło");
-                            Console.WriteLine("Czy chcesz sie cofnąć (T/N) ?");
+                            Console.WriteLine("Błedny login");
+                            Console.WriteLine("Czy chcesz wyjść z programu (T/N) ?");
                             string odp = Console.ReadLine().ToUpper();
                             if (odp == "T" || odp == "TAK" || odp == "Y" || odp == "YES")
                             {
                                 break;
                             }
                         }
-                    } while (true);
-                   
 
+
+
+                    }
+                    while (true);
+                }
+                else if (_odp == 2)
+                {
+
+                    Console.WriteLine("Podaj login:");
+                    _oUser.Login = Console.ReadLine().ToLower();
+
+                    if (string.IsNullOrEmpty(_oUser.Login))
+                    {
+                        Console.WriteLine("Login nie może być pusty!");
+
+                        return _oUser.Login;
+
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Błedny login");
-                    Console.WriteLine("Czy chcesz wyjść z programu (T/N) ?");
-                    string odp = Console.ReadLine().ToUpper();
-                    if (odp == "T" || odp == "TAK" || odp == "Y" || odp == "YES")
-                    {
-                        break;
-                    }
+                    Console.WriteLine("Błąd podaj cyfrę 1 lub 2");
                 }
-                
-
-
-            }
-            while (true);
+            } while (true);
+            
+            
 
 
        

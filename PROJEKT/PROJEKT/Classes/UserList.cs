@@ -83,7 +83,6 @@ namespace PROJEKT.Classes.Business
         public virtual User Add() => Add(User.Add());
         public virtual User Get(int a_iIndex) => UserCollection[a_iIndex];
         public virtual int Count => UserCollection.Count;
-
         public List<User> Collection => UserCollection;
     }
 }
