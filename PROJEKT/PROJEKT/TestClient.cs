@@ -126,13 +126,7 @@ namespace PROJEKT
             Client.AsyncSend(_msgTo.AsNetworkData());
         }
 
-        public void ReadFile()
-        {
-            TextMessage text = new TextMessage();
-
-            text.reader();
-
-        }
+       
 
         public virtual void Run()
         {
@@ -164,11 +158,7 @@ namespace PROJEKT
                         case ConsoleKey.D3:
                             SendMessage(false);
                             break;
-                        case ConsoleKey.D4:
-
-                            ReadFile();
-                            break;
-
+                        
                     }
                 }
                 else

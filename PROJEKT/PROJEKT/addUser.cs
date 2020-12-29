@@ -1,130 +1,162 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Net;
 using System.Runtime.Serialization;
 using System.Security;
-using System.Security.Cryptography;
 using System.Text;
-using PROJEKT.Classes;
-using PROJEKT.Classes.Messages;
-using PROJEKT.Classes.Services;
-using PROJEKT.Interfaces;
+using PROJEKT.Classes.System;
+using System.Xml.Serialization;
+using System.Xml;
 
-
-namespace PROJEKT
+namespace PROJEKT.Classes.Business
 {
-    public class addUser : XmlStorage<addUser>
+    [DataContract]
+    public class User : XmlStorage<User>
     {
-        private string Login;
-       private SecureString securePwd;
-        private int _permisson;
+        [DataMember]
+        public string Login { get; set; }
+        [DataMember]
+        public string Password { get; set; }
+        [DataMember]
+        public int Permission { get; set; }
+        
 
-        public string NewLogin1 { get => Login; set => Login = value; }
-        public SecureString NewPassword { get => securePwd; set => securePwd = value; }
-        public int Permission { get => _permisson; set => _permisson = value; }
 
-        public void Adiing()
+        public override bool InitializeFromObject(User Object)
         {
-
-
-            bool t = true;
-            while (t)
-            {
-                Console.WriteLine("Podaj Numer opcji: \n1 - Dodaj użytkownika\n2 - cofnij");
-                int j;
-                int.TryParse(Console.ReadLine(), out j);
-                if (j == 1)
-                {
-                    string newLogin = "";
-                    SecureString newPassword;
-                    int permission = 0;
-
-
-
-
-                    if (newLogin.Length > 2)
-                    {
-                        Console.WriteLine("Wprowadź login:");
-                        Console.WriteLine();
-                        newLogin = Console.ReadLine().ToLower();
-
-
-                    }
-
-                    bool k = true;
-                    int i;
-                    if (i >= 1 && i <= 2)
-                    {
-                        Console.WriteLine("Nadaj uprawnienia \n1 - admin \n2 - lekarz");
-                        int.TryParse(Console.ReadLine(), out i);
-
-                        permission = i;
-                        k = false;
-
-
-                        if (i > 2)
-                        {
-                            Console.WriteLine("Uprawnienia: \n1- admin \n2-użytkownik ");
-                        }
-                    }
-
-
-                    if (newPassword.Length > 2)
-                    {
-                        Console.WriteLine("Wprowadź hasło:");
-                        Console.WriteLine();
-
-
-                        string passwd = Console.ReadLine();
-                     
-                        passwd = new System.Net.NetworkCredential(string.Empty, newPassword).Password;
-
-
-
-
-                    }
-
-
-
-                }
-
-            }
-            NewLogin();
-
-            if (j != 1)
-            {
-                t = false;
-            }
-        }
-
-
-        public override bool InitializeFromObject(addUser Object)
-        {
-            Login = Object.Login;
-            securePwd = Object.securePwd;
-            _permisson = Object._permisson;
+            this.Login = Object.Login;
+            this.Password = Object.Password;
+            this.Permission = Object.Permission;
 
             return true;
         }
 
-
-
-        public NetworkData NewLogin(int a_iBufferSize = NetworkService.BUFFER_SIZE)
+        public void SaveAsXml(string a_sFileName)
         {
 
-            return new NetworkData(a_iBufferSize)
+            using var _log = Log.DEB(this, "SaveAsXml");
+
+            try
             {
-                Buffer = ToXml("login.xml").ToArray()
-            };
+                using (var _file = new StreamWriter(a_sFileName, append: true))
+                {
+                    var _sStrBuff = Encoding.UTF8.GetString(ToXml().ToArray());
+
+                    _log.PR_DEB(_sStrBuff);
 
 
+                    _file.Write(_sStrBuff);
+
+                }
+            }
+            catch (Exception e)
+            {
+                _log.PR_DEB($"Błąd! {e.Message}");
+            }
         }
 
+
+
+        public static User LoadFromXml(string a_sFileName)
+        {
+            using var _log = Log.DEB("User", "LoadFromXml");
+
+            
+
+                User _oUser = null;
+            try
+            {
+                _log.PR_DEB($"próba odczytu użytkownika z pliku <{a_sFileName}>...");
+                
+                    using (var _file = new StreamReader(a_sFileName))
+                    {
+                       var _sStrBuff = _file.ReadToEnd();
+
+                        var _oBuffer = Encoding.UTF8.GetBytes(_sStrBuff);
+
+                        _oUser = new User();
+
+                        _oUser.FromXml(new MemoryStream(_oBuffer));
+
+
+                    }
+                
+            }
+            catch (Exception e)
+            {
+                _log.PR_DEB($"Błąd! {e.Message}");
+            }
+
+            return _oUser;
+        }
+
+       
+
+        public static User Add()
+        {
+            User _oUser = new User();
+
+
+            do
+            {
+                Console.Write("Podaj login:");
+
+                _oUser.Login = Console.ReadLine().ToLower();
+
+                if (string.IsNullOrEmpty(_oUser.Login))
+                {
+                    Console.WriteLine("Login nie może być pusty!");
+                }
+                else
+                    break;
+            }
+            while (true);
+
+            do
+            {
+                Console.Write("Podaj uprawnienia (1-2):");
+
+                if (int.TryParse(Console.ReadLine(), out int _iPermission) && _iPermission >= 1 && _iPermission <= 2)
+                {
+                    _oUser.Permission = _iPermission;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Błędnie podane uprawnienia!");
+                }
+            }
+            while (true);
+
+            do
+            {
+                Console.Write("Wprowadź hasło:");
+                _oUser.Password = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(_oUser.Password))
+                {
+                    Console.WriteLine("Hasło nie może być puste!");
+                }
+                else
+                {
+                    break;
+                }
+            }
+            while (true);
+
+            return _oUser;
+        }
 
         public override string ToString()
         {
-            return $"[Login={Login}\nPassword={securePwd}\nPermmison={_permisson}]";
+            return $"Login={Login}|Password={Password}|Permission={Permission}";
         }
-    }    } 
 
+
+        
+      
+    }
+
+
+}
