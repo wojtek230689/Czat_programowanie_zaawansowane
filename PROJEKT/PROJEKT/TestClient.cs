@@ -22,7 +22,9 @@ namespace PROJEKT
 
         public ClientService Client;
 
-        private string _oLogin;
+        private logowanie _Login = new logowanie();
+
+
 
         public bool StillWorking = true;
 
@@ -43,10 +45,10 @@ namespace PROJEKT
                         break;
 
                     case State.Connected:
-                        polaczenie();
+                        OnConnected(a_oStateObj);
                         break;
 
-                    case State.Receiving:                        
+                    case State.Receiving:
                         break;
 
                     case State.Received:
@@ -81,10 +83,10 @@ namespace PROJEKT
         {
             var _client = a_oStateObj.GetObject<ClientService>();
 
-         
+            
             var _loginTelegram = new LoginMessage
             {
-                Login = _oLogin
+              // Login = _Login.Login()
             };
 
             _client.AsyncSend(_loginTelegram.AsNetworkData());
@@ -92,23 +94,8 @@ namespace PROJEKT
             OnReceived(_client.SyncReceive());
         }
 
-        public void polaczenie(StateObject a_oStateObj = null)
-        {
-            logowanie _Login = new logowanie();
-            _oLogin = _Login.Login();
-            OnConnected(a_oStateObj);
-        }
 
 
-        public virtual void MenuDisplay()
-        {
-            Console.WriteLine();
-            Console.WriteLine("1 - zaloguj");
-            Console.WriteLine("2 - wyślij wiadomość do wszystkich");
-            Console.WriteLine("3 - wyślij wiadomość do użytkownika");
-            Console.WriteLine("0 - wyjdź");
-            Console.WriteLine();
-        }
 
         public virtual void SendMessage(bool a_bToAll)
         {
@@ -134,27 +121,6 @@ namespace PROJEKT
             Client.AsyncSend(_msgTo.AsNetworkData());
         }
 
-        public virtual void SendMessageToDoctor(string kto)
-        {
-            Console.WriteLine("Wprowadz dane:");
-            string _sTo; 
-
-            Console.Write("Do:");
-             _sTo = kto;
-            
-
-            Console.Write("Wiadomosc:");
-            string _sText = Console.ReadLine();
-
-            TextMessage _msgTo = new TextMessage
-            {
-                From = Client.Identifier,
-                To = _sTo,
-                Text = _sText
-            };
-
-            Client.AsyncSend(_msgTo.AsNetworkData());
-        }
 
 
         public virtual void Run()
@@ -164,35 +130,51 @@ namespace PROJEKT
                 NetworkAction = this
             };
 
-            MenuDisplay();
 
             while (StillWorking)
             {
-                if (Console.KeyAvailable)
-                {
-                    switch (Console.ReadKey(true).Key)
-                    {
-                        case ConsoleKey.D0:
-                            StillWorking = false; break;
+              Client.Establish();
+              SendMessage(false);
 
-                        case ConsoleKey.D1:
-                            if (!Client.IsConnected)
-                                Client.Establish();
-                            break;
-
-                        case ConsoleKey.D2:
-                            SendMessage(true);
-                            break;
-
-                        case ConsoleKey.D3:
-                            SendMessage(false);
-                            break;
-                        
-                    }
-                }
-                else
-                    Thread.Sleep(10);
             }
         }
+
+
+        //public virtual void Run()
+        //{
+        //    Client = new ClientService(IPAddress.Loopback, 1000)
+        //    {
+        //        NetworkAction = this
+        //    };
+
+
+        //    while (StillWorking)
+        //    {
+        //        if (Console.KeyAvailable)
+        //        {
+        //            switch (Console.ReadKey(true).Key)
+        //            {
+        //                case ConsoleKey.D0:
+        //                    StillWorking = false; break;
+
+        //                case ConsoleKey.D1:
+        //                    if (!Client.IsConnected)
+        //                        Client.Establish();
+        //                    break;
+
+        //                case ConsoleKey.D2:
+        //                    SendMessage(true);
+        //                    break;
+
+        //                case ConsoleKey.D3:
+        //                    SendMessage(false);
+        //                    break;
+
+        //            }
+        //        }
+        //        else
+        //            Thread.Sleep(10);
+        //    }
+        //}
     }
 }

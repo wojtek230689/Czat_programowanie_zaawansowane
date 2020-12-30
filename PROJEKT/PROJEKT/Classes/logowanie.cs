@@ -17,19 +17,26 @@ namespace PROJEKT.Classes
     class logowanie
     {
 
-        public  string Login()
+
+        public UserList Login()
         {
 
             Console.Clear();
-
             UserList _oLista = new UserList();
-
             User _oUser = new User();
             Menu menu = new Menu();
 
 
-            _oLista.LoadFromXml(@"baza_uzytkownikow.xml");
 
+
+            if (File.Exists(@"baza_uzytkownikow.xml"))
+            {
+                _oLista.LoadFromXml(@"baza_uzytkownikow.xml");
+            }
+            else
+            {
+                Console.WriteLine("Błąd bazy danych");
+            }
             do
             {
                 Console.WriteLine("Zaloguj się jako:");
@@ -70,18 +77,16 @@ namespace PROJEKT.Classes
                                 {
                                     if (_oLista.Collection.Exists(x => x.Login == _oUser.Login && x.Permission == 1))
                                     {
+                                        _oLista.Add(new User() { Login = _oUser.Login, Permission = 1 } );
 
-                                        menu.menuLekarza();
-
-
-                                        return _oUser.Login;
-
+                                        return _oLista;
 
                                     }
                                     if (_oLista.Collection.Exists(x => x.Login == _oUser.Login && x.Permission == 2))
                                     {
-                                        menu.menuAdmina();
-                                        return _oUser.Login;
+                                        _oLista.Add(new User { Login = _oUser.Login, Permission = 2 });
+
+                                        return _oLista;
 
                                     }
 
@@ -126,9 +131,15 @@ namespace PROJEKT.Classes
                     if (string.IsNullOrEmpty(_oUser.Login))
                     {
                         Console.WriteLine("Login nie może być pusty!");
+                        
 
-                        return _oUser.Login;
+                    }
+                    else if (!string.IsNullOrEmpty(_oUser.Login))
+                    {
 
+                        _oLista.Add(new User { Login = _oUser.Login, Permission = 3 });
+
+                        return _oLista;
                     }
                 }
                 else

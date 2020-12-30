@@ -9,11 +9,21 @@ using PROJEKT.Interfaces;
 using PROJEKT.Classes.Business;
 
 
+using static PROJEKT.Interfaces.INetworkAction;
+using System.Threading.Tasks;
+using PROJEKT.Classes.Messages;
+using System.IO;
+using System.Linq;
 
 namespace PROJEKT
 {
-    public class Menu 
+    public class Menu : INetworkAction
     {
+        UserList _oLogin = new UserList();
+
+        
+
+        private string login;
         enum Admin
         {
             Dodaj_lekarza = 1,
@@ -127,7 +137,25 @@ namespace PROJEKT
                                 if (grypa1 == 1)
                                 {
                                     Console.WriteLine("Prawdopodobnie jesteś zarażony koronawirusem. Łączymy z lekarzem.");
-                                    // POŁĄCZENIE Z LEKARZEM //
+
+                                    Console.WriteLine($"login: {_oLogin}");
+                                    Console.ReadKey();
+                                    Client = new ClientService(IPAddress.Loopback, 1000)
+                                    {
+                                        NetworkAction = this
+                                    };
+
+
+                                    while (StillWorking)
+                                    {
+                                        Client.Establish();
+                                        SendMessage(false);
+
+                                    }
+
+
+
+                                    //--->>> POŁĄCZENIE Z LEKARZEM //
                                 }
                                 else if (grypa1 == 2)
                                 {
@@ -309,6 +337,148 @@ namespace PROJEKT
                 }
             }
         }
+
+
+        private static readonly object LOCKOBJECT = new object();
+
+        public ClientService Client;
+
+        
+
+
+        public bool StillWorking = true;
+
+        public void StateChanged(State a_eState, StateObject a_oStateObj = null)
+        {
+            lock (LOCKOBJECT)
+            {
+
+                switch (a_eState)
+                {
+                    case State.Sending:
+                        break;
+
+                    case State.Sent:
+                        break;
+
+                    case State.Connecting:
+                        break;
+
+                    case State.Connected:
+                       OnConnected(a_oStateObj);
+                        break;
+
+                    case State.Receiving:
+                        break;
+
+                    case State.Received:
+                        OnReceived(a_oStateObj);
+                        break;
+
+                    case State.Error:
+                        break;
+                }
+            }
+        }
+
+        protected void OnReceived(StateObject a_oStateObj)
+        {
+            var _client = a_oStateObj.GetObject<ClientService>();
+
+            var _message = MessageFactory.Instance.Create(_client.Data.BufferWithData);
+
+            try
+            {
+                _message.ProcessResponse(a_oStateObj);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Wystąpił błąd! {e.Message}\n");
+            }
+
+            _client.AsyncReceive();
+        }
+
+        protected void OnConnected(StateObject a_oStateObj)
+        {
+            var _client = a_oStateObj.GetObject<ClientService>();
+
+
+            var _loginTelegram = new LoginMessage
+            {
+                Login = login
+            };
+
+            _client.AsyncSend(_loginTelegram.AsNetworkData());
+
+            OnReceived(_client.SyncReceive());
+        }
+
+
+
+
+        public virtual void SendMessage(bool a_bToAll)
+        {
+            Console.WriteLine("Wprowadz dane:");
+            string _sTo = "*";
+
+            if (!a_bToAll)
+            {
+                Console.Write("Do:");
+                _sTo = Console.ReadLine();
+            }
+
+            Console.Write("Wiadomosc:");
+            string _sText = Console.ReadLine();
+
+            TextMessage _msgTo = new TextMessage
+            {
+                From = Client.Identifier,
+                To = _sTo,
+                Text = _sText
+            };
+
+            Client.AsyncSend(_msgTo.AsNetworkData());
+        }
+
+
+
+        public virtual void Run()
+        {
+            UserList _ListFromFile = new UserList();
+
+
+            if (File.Exists(@"baza_uzytkownikow.xml"))
+            {
+                _ListFromFile.LoadFromXml(@"baza_uzytkownikow.xml");
+            }
+            else
+            {
+                Console.WriteLine("Błąd bazy danych 2");
+            }
+            _oLogin = new logowanie().Login();
+
+
+            foreach (var item in _oLogin.Collection)
+            {
+                login = item.Login;
+
+                if (_ListFromFile.Collection.Exists(x => x.Login == item.Login && x.Permission == 1))
+                {
+                    menuAdmina();
+
+                }
+                else if (_ListFromFile.Collection.Exists(x => x.Login == item.Login && x.Permission == 2))
+                {
+                    menuLekarza();
+                }
+                else if (_oLogin.Collection.Exists(x => x.Permission == 3))
+                {
+                    menuUsera();
+                }
+            }
+        }
+
     }
 
 }

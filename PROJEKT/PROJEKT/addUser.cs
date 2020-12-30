@@ -153,9 +153,7 @@ namespace PROJEKT.Classes.Business
             return $"Login={Login}|Password={Password}|Permission={Permission}";
         }
 
-
         
-      
     }
 
 

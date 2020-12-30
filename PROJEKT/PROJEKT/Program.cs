@@ -50,10 +50,10 @@ namespace PROJEKT
                         new TestServer().Run(); break;
 
                     case 2:
-                        new TestClient().Run(); break;
+                        new Menu().Run(); break;
                 }
             }
-            
+
         }
     }
 }
