@@ -23,6 +23,8 @@ namespace PROJEKT.Classes
 
             Console.Clear();
             UserList _oLista = new UserList();
+            UserList _oNewLista = new UserList();
+
             User _oUser = new User();
             Menu menu = new Menu();
 
@@ -77,16 +79,16 @@ namespace PROJEKT.Classes
                                 {
                                     if (_oLista.Collection.Exists(x => x.Login == _oUser.Login && x.Permission == 1))
                                     {
-                                        _oLista.Add(new User() { Login = _oUser.Login, Permission = 1 } );
+                                        _oNewLista.Add(new User() { Login = _oUser.Login, Permission = 1 } );
 
-                                        return _oLista;
+                                        return _oNewLista;
 
                                     }
                                     if (_oLista.Collection.Exists(x => x.Login == _oUser.Login && x.Permission == 2))
                                     {
-                                        _oLista.Add(new User { Login = _oUser.Login, Permission = 2 });
+                                        _oNewLista.Add(new User { Login = _oUser.Login, Permission = 2 });
 
-                                        return _oLista;
+                                        return _oNewLista;
 
                                     }
 
@@ -137,9 +139,9 @@ namespace PROJEKT.Classes
                     else if (!string.IsNullOrEmpty(_oUser.Login))
                     {
 
-                        _oLista.Add(new User { Login = _oUser.Login, Permission = 3 });
+                        _oNewLista.Add(new User { Login = _oUser.Login, Permission = 3 });
 
-                        return _oLista;
+                        return _oNewLista;
                     }
                 }
                 else

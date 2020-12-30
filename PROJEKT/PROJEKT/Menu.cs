@@ -463,12 +463,12 @@ namespace PROJEKT
             {
                 login = item.Login;
 
-                if (_ListFromFile.Collection.Exists(x => x.Login == item.Login && x.Permission == 1))
+                if (_oLogin.Collection.Exists(x => x.Login == item.Login && x.Permission == 1))
                 {
                     menuAdmina();
 
                 }
-                else if (_ListFromFile.Collection.Exists(x => x.Login == item.Login && x.Permission == 2))
+                else if (_oLogin.Collection.Exists(x => x.Login == item.Login && x.Permission == 2))
                 {
                     menuLekarza();
                 }
