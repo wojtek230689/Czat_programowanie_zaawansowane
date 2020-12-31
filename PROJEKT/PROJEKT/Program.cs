@@ -19,6 +19,7 @@ namespace PROJEKT
         static void Main(string[] args)
         {
 
+
             XmlStorageTypes.Register<Exception>();
             XmlStorageTypes.Register<StateObject>();
             XmlStorageTypes.Register<Response>();
@@ -26,7 +27,7 @@ namespace PROJEKT
             MessageFactory.Instance.Register<LoginMessage>();
             MessageFactory.Instance.Register<TextMessage>();
 
-          
+
             Console.Clear();
 
             if ((args?.Length ?? 0) < 1)

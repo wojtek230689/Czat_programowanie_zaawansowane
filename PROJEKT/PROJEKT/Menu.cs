@@ -24,6 +24,8 @@ namespace PROJEKT
         
 
         private string login;
+        private static Random rng = new Random();
+        private string nameDoctor;
         enum Admin
         {
             Dodaj_lekarza = 1,
@@ -78,6 +80,7 @@ namespace PROJEKT
                 switch (start)
                 {
                     case Admin.Dodaj_lekarza:
+                        new addUser().adding();
                         break;
                     case Admin.Odczytaj_wiadomość_od_lekarza:
                         break;
@@ -138,8 +141,8 @@ namespace PROJEKT
                                 {
                                     Console.WriteLine("Prawdopodobnie jesteś zarażony koronawirusem. Łączymy z lekarzem.");
 
-                                    Console.WriteLine($"login: {_oLogin}");
-                                    Console.ReadKey();
+                                    GenerateDocotor();
+                                    Console.WriteLine($"login: {login}");
                                     Client = new ClientService(IPAddress.Loopback, 1000)
                                     {
                                         NetworkAction = this
@@ -149,7 +152,7 @@ namespace PROJEKT
                                     while (StillWorking)
                                     {
                                         Client.Establish();
-                                        SendMessage(false);
+                                        SendMessageToDoctor(false);
 
                                     }
 
@@ -165,6 +168,20 @@ namespace PROJEKT
                                     int grypa2 = int.Parse(Console.ReadLine());
                                     if (grypa2 == 1)
                                     {
+                                        GenerateDocotor();
+                                        Console.WriteLine($"login: {login}");
+                                        Client = new ClientService(IPAddress.Loopback, 1000)
+                                        {
+                                            NetworkAction = this
+                                        };
+
+
+                                        while (StillWorking)
+                                        {
+                                            Client.Establish();
+                                            SendMessageToDoctor(false);
+
+                                        }
                                         // POŁĄCZENIE Z LEKARZEM //
                                     }
                                     else if (grypa2 == 2)
@@ -197,6 +214,20 @@ namespace PROJEKT
                                         int zlamanie2 = int.Parse(Console.ReadLine());
                                         if (zlamanie2 == 1)
                                         {
+                                            GenerateDocotor();
+                                            Console.WriteLine($"login: {login}");
+                                            Client = new ClientService(IPAddress.Loopback, 1000)
+                                            {
+                                                NetworkAction = this
+                                            };
+
+
+                                            while (StillWorking)
+                                            {
+                                                Client.Establish();
+                                                SendMessageToDoctor(false);
+
+                                            }
                                             //POŁĄCZENIE Z LEKARZEM//
                                         }
                                         else if (zlamanie2 == 2)
@@ -217,6 +248,20 @@ namespace PROJEKT
                                     {
 
                                         Console.WriteLine("To może być złamanie. Należy skonsultować się z lekarzem");
+                                        GenerateDocotor();
+                                        Console.WriteLine($"login: {login}");
+                                        Client = new ClientService(IPAddress.Loopback, 1000)
+                                        {
+                                            NetworkAction = this
+                                        };
+
+
+                                        while (StillWorking)
+                                        {
+                                            Client.Establish();
+                                            SendMessageToDoctor(false);
+
+                                        }
                                         //POŁĄCZENIE Z LEKARZEM//
                                     }
                                     else if (zlamanie1 == 2)
@@ -247,6 +292,20 @@ namespace PROJEKT
 
                                         Console.WriteLine("Jeżeli objawy występują dłużej lub są nasilone należy skonsultować sprawę z lekarzem");
                                         Console.WriteLine("Połączymy Cię teraz z lekarzem");
+                                        GenerateDocotor();
+                                        Console.WriteLine($"login: {login}");
+                                        Client = new ClientService(IPAddress.Loopback, 1000)
+                                        {
+                                            NetworkAction = this
+                                        };
+
+
+                                        while (StillWorking)
+                                        {
+                                            Client.Establish();
+                                            SendMessageToDoctor(false);
+
+                                        }
                                         //POŁĄCZENIE Z LEKARZEM//
 
                                     }
@@ -259,6 +318,20 @@ namespace PROJEKT
                                         int zatrucieLekarz = int.Parse(Console.ReadLine());
                                         if (zatrucieLekarz == 1)
                                         {
+                                            GenerateDocotor();
+                                            Console.WriteLine($"login: {login}");
+                                            Client = new ClientService(IPAddress.Loopback, 1000)
+                                            {
+                                                NetworkAction = this
+                                            };
+
+
+                                            while (StillWorking)
+                                            {
+                                                Client.Establish();
+                                                SendMessageToDoctor(false);
+
+                                            }
                                             //POŁĄCZENIE Z LEKARZEM//
                                         }
                                         else if (zatrucieLekarz == 2)
@@ -273,6 +346,20 @@ namespace PROJEKT
                                 else if (zatrucie == 2)
                                 {
                                     Console.WriteLine("Te objawy wskazują na silne zatrucie i należy skontaktować się z lekarzem. Następuje łączenie...");
+                                    GenerateDocotor();
+                                    Console.WriteLine($"login: {login}");
+                                    Client = new ClientService(IPAddress.Loopback, 1000)
+                                    {
+                                        NetworkAction = this
+                                    };
+
+
+                                    while (StillWorking)
+                                    {
+                                        Client.Establish();
+                                        SendMessageToDoctor(false);
+
+                                    }
                                     //POŁĄCZENIE Z LEKARZEM//
 
                                 }
@@ -281,7 +368,20 @@ namespace PROJEKT
                             else if (wybor == 4)
                             {
                                 Console.WriteLine("Łączę z dostępnym lekarzem");
+                                GenerateDocotor();
+                                Console.WriteLine($"login: {login}");
+                                Client = new ClientService(IPAddress.Loopback, 1000)
+                                {
+                                    NetworkAction = this
+                                };
 
+
+                                while (StillWorking)
+                                {
+                                    Client.Establish();
+                                    SendMessageToDoctor(false);
+
+                                }
                                 // POŁĄCZENIE Z LEKARZEM //
 
 
@@ -330,6 +430,23 @@ namespace PROJEKT
                     case Lekarz.Zostaw_wiadomość_administratorowi:
                         break;
                     case Lekarz.Wejdź_do_czatu:
+                        while (true)
+                        {
+                            Console.ReadKey();
+                            Client = new ClientService(IPAddress.Loopback, 1000)
+                            {
+                                NetworkAction = this
+                            };
+
+
+                            while (StillWorking)
+                            {
+                                Client.Establish();
+                                SendMessage(false);
+
+                            }
+
+                        }
                         break;
                     case Lekarz.Wyjdź:
                         k = false;
@@ -365,7 +482,7 @@ namespace PROJEKT
                         break;
 
                     case State.Connected:
-                       OnConnected(a_oStateObj);
+                        OnConnected(a_oStateObj);
                         break;
 
                     case State.Receiving:
@@ -380,6 +497,7 @@ namespace PROJEKT
                 }
             }
         }
+
 
         protected void OnReceived(StateObject a_oStateObj)
         {
@@ -399,20 +517,6 @@ namespace PROJEKT
             _client.AsyncReceive();
         }
 
-        protected void OnConnected(StateObject a_oStateObj)
-        {
-            var _client = a_oStateObj.GetObject<ClientService>();
-
-
-            var _loginTelegram = new LoginMessage
-            {
-                Login = login
-            };
-
-            _client.AsyncSend(_loginTelegram.AsNetworkData());
-
-            OnReceived(_client.SyncReceive());
-        }
 
 
 
@@ -440,44 +544,124 @@ namespace PROJEKT
 
             Client.AsyncSend(_msgTo.AsNetworkData());
         }
+        public virtual void SendMessageToDoctor(bool a_bToAll)
+        {
+            string _sTo = nameDoctor;
 
+
+
+            Console.Write("Wiadomosc:");
+            string _sText = Console.ReadLine();
+
+            TextMessage _msgTo = new TextMessage
+            {
+                From = Client.Identifier,
+                To = _sTo,
+                Text = _sText
+            };
+
+            Client.AsyncSend(_msgTo.AsNetworkData());
+        }
+
+
+        protected void OnConnected(StateObject a_oStateObj)
+        {
+            var _client = a_oStateObj.GetObject<ClientService>();
+
+
+            var _loginTelegram = new LoginMessage
+            {
+                Login = login
+            };
+
+            _client.AsyncSend(_loginTelegram.AsNetworkData());
+
+            OnReceived(_client.SyncReceive());
+        }
 
 
         public virtual void Run()
         {
-            UserList _ListFromFile = new UserList();
 
 
-            if (File.Exists(@"baza_uzytkownikow.xml"))
-            {
-                _ListFromFile.LoadFromXml(@"baza_uzytkownikow.xml");
-            }
-            else
-            {
-                Console.WriteLine("Błąd bazy danych 2");
-            }
+         
             _oLogin = new logowanie().Login();
 
 
             foreach (var item in _oLogin.Collection)
             {
-                login = item.Login;
 
                 if (_oLogin.Collection.Exists(x => x.Login == item.Login && x.Permission == 1))
                 {
+                    login = item.Login;
+
                     menuAdmina();
 
                 }
                 else if (_oLogin.Collection.Exists(x => x.Login == item.Login && x.Permission == 2))
                 {
+                    login = item.Login;
+
                     menuLekarza();
                 }
                 else if (_oLogin.Collection.Exists(x => x.Permission == 3))
                 {
+                    login = item.Login;
+
                     menuUsera();
                 }
             }
         }
+   
+
+
+        private void GenerateDocotor()
+        {
+            UserList _oDoctor = new UserList();
+            UserList Doctor = new UserList();
+
+
+            if (File.Exists(@"baza_uzytkownikow.xml"))
+            {
+                _oDoctor.LoadFromXml(@"baza_uzytkownikow.xml");
+            }
+            else
+            {
+                Console.WriteLine("Błąd bazy danych 2");
+            }
+
+
+
+            foreach (var item in _oDoctor.Collection)
+            {
+
+                 if (_oDoctor.Collection.Exists(x => x.Login == item.Login && x.Permission == 2))
+                {
+                    Doctor.Add(new User {Login = item.Login });
+                }
+
+                
+            }
+
+
+            int n = Doctor.Count;
+            do
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                User value = Doctor.Collection[k];
+                Doctor.Collection[k] = Doctor.Collection[n];
+                Doctor.Collection[n] = value;
+                nameDoctor = value.Login;
+            } while (n > 1);
+
+
+
+
+
+
+        }
+       
 
     }
 
