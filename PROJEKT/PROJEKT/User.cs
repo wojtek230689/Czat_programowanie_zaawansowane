@@ -100,10 +100,12 @@ namespace PROJEKT.Classes.Business
 
             do
             {
+                
                 Console.Write("Podaj login:");
 
                 _oUser.Login = Console.ReadLine().ToLower();
 
+               
                 if (string.IsNullOrEmpty(_oUser.Login))
                 {
                     Console.WriteLine("Login nie może być pusty!");

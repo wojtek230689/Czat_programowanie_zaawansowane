@@ -2,7 +2,7 @@
 
 namespace PROJEKT
 {
-    internal class Cov_19
+    public class Cov_19
     {
         public string nazwa = "COVID-19 - ostra choroba zakaźna układu oddechowego wywołana zakażeniem wirusem SARS-CoV-2.\nZostała po raz pierwszy rozpoznana i opisana w listopadzie 2019r. w środkowych Chinach(W mieście Wuhan).\n";
         public string objawy = "Większość pacjętów ma łągodne objawy i dobre rokowania.\nDo typowych objawów choroby zalicza się: GORĄCZKĘ, SUCHY KASZEL, ZMĘCZENIE, PŁYTKI ODDECH oraz UTRATA WĘCHU ORAZ SMAKU.\n";
@@ -13,26 +13,25 @@ namespace PROJEKT
         public string zapobieganie = "Do podstawowych metod zapobiegania zakażeniom zalicza się:\nDOKŁADNE I CZĘSTE MYCIE DŁONI, UTRZYMYWANIE DYSTANSU FIZYCZNEGO OD OSÓB Z OBJAWAMI GRYPODOPODOBNYMI ORAZ UNIKANIE DOTYKANIA TWARZY NIEMYTYMI DŁOŃMI.\nZaleca się zakrywanie ust oraz nosa podczas kaszlu chusteczką lub zgięciem łokcia.\n ";
 
 
-        internal void printInfo()
+        public void printInfo()
         {
-            System.Console.WriteLine();
-            System.Console.WriteLine();
-            System.Console.WriteLine("Nazwa:\n" + nazwa);
-            System.Console.WriteLine();
-            System.Console.WriteLine("Objawy:\n" + objawy);
-            System.Console.WriteLine();
-            System.Console.WriteLine("Symptomy:\n" + symptomy);
-            System.Console.WriteLine();
-            System.Console.WriteLine("Możliwe powikłania:\n" + powiklania);
-            System.Console.WriteLine();
-            System.Console.WriteLine("Przebieg choroby:\n" + przebieg);
-            System.Console.WriteLine();
-            System.Console.WriteLine("Leczenie:\n" + leczenie);
-            System.Console.WriteLine();
-            System.Console.WriteLine("Zapobieganie:\n" + zapobieganie);
-            System.Console.WriteLine();
-            System.Console.WriteLine();
-            System.Console.WriteLine("Aby wrócić do głównego menu wciśnij dowolny klawisz");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Nazwa:\n" + nazwa);
+           Console.WriteLine();
+            Console.WriteLine("Objawy:\n" + objawy);
+            Console.WriteLine();
+            Console.WriteLine("Symptomy:\n" + symptomy);
+            Console.WriteLine();
+            Console.WriteLine("Możliwe powikłania:\n" + powiklania);
+           Console.WriteLine();
+            Console.WriteLine("Przebieg choroby:\n" + przebieg);
+            Console.WriteLine();
+           Console.WriteLine("Leczenie:\n" + leczenie);
+            Console.WriteLine();
+            Console.WriteLine("Zapobieganie:\n" + zapobieganie);
+            Console.WriteLine();
+            
         }
     }
     }

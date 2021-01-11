@@ -76,3 +76,29 @@ C:\Users\wojtek\Desktop\projekt programowanie zaaawansowan\Czat_programowanie_za
 C:\Users\wojtek\Desktop\projekt programowanie zaaawansowan\Czat_programowanie_zaawansowane\Czat_programowanie_zaawansowane\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.dll
 C:\Users\wojtek\Desktop\projekt programowanie zaaawansowan\Czat_programowanie_zaawansowane\Czat_programowanie_zaawansowane\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.pdb
 C:\Users\wojtek\Desktop\projekt programowanie zaaawansowan\Czat_programowanie_zaawansowane\Czat_programowanie_zaawansowane\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.genruntimeconfig.cache
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.exe
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.deps.json
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.runtimeconfig.json
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.runtimeconfig.dev.json
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.dll
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.pdb
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.csprojAssemblyReference.cache
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.AssemblyInfoInputs.cache
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.AssemblyInfo.cs
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.csproj.CoreCompileInputs.cache
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.dll
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.pdb
+C:\Users\Adaś\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.genruntimeconfig.cache
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.exe
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.deps.json
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.runtimeconfig.json
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.runtimeconfig.dev.json
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.dll
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\bin\Debug\netcoreapp3.1\PROJEKT.pdb
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.csprojAssemblyReference.cache
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.AssemblyInfoInputs.cache
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.AssemblyInfo.cs
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.csproj.CoreCompileInputs.cache
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.dll
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.pdb
+C:\Users\Wojtek\Desktop\Czat_programowanie_zaawansowane-master\PROJEKT\PROJEKT\obj\Debug\netcoreapp3.1\PROJEKT.genruntimeconfig.cache

@@ -20,15 +20,20 @@ namespace PROJEKT
     public class Menu : INetworkAction
     {
         UserList _oLogin = new UserList();
+        Obecne_obostrzenia obostrzenia = new Obecne_obostrzenia();
+        Cov_19 cov19 = new Cov_19();
+        Text text = new Text();
+        UserList _oLista = new UserList();
+        TextList _oTextList = new TextList();
 
-        
 
         private string login;
         private static Random rng = new Random();
         private string nameDoctor;
         enum Admin
         {
-            Dodaj_lekarza = 1,
+            Dodaj_lekarza_lub_admina = 1,
+            Usuń_lekarza_lub_admina,
             Odczytaj_wiadomość_od_lekarza,
             Wyjdź
 
@@ -79,10 +84,32 @@ namespace PROJEKT
 
                 switch (start)
                 {
-                    case Admin.Dodaj_lekarza:
+                    case Admin.Dodaj_lekarza_lub_admina:
                         new addUser().adding();
                         break;
+                    case Admin.Usuń_lekarza_lub_admina:
+                        new addUser().deleting();
+                        break;
                     case Admin.Odczytaj_wiadomość_od_lekarza:
+
+                        if (File.Exists(@"wiadomosci.xml"))
+                        {
+                            _oTextList.LoadFromXml(@"wiadomosci.xml");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Błąd bazy odczytywania wiadomości");
+                        }
+
+                        foreach (var item in _oTextList.Collection)
+                        {
+                            Console.WriteLine(item.From);
+                            Console.WriteLine(item.Submit);
+
+                        }
+
+
+
                         break;
                     case Admin.Wyjdź:
                         k = false;
@@ -93,10 +120,12 @@ namespace PROJEKT
 
         public void menuUsera()
         {
+
+
             bool k = true;
             while (k)
             {
-                Console.Clear();
+                //Console.Clear();
 
                 Console.WriteLine("Menu:");
 
@@ -389,10 +418,21 @@ namespace PROJEKT
                         }
                         break;
                     case Pacjent.Kurs_pierwszej_pomocy:
+                        Console.Clear();
+                        Menu_Pomoc menupomocy = new Menu_Pomoc();
+                        menupomocy.MenuPomocy();
                         break;
                     case Pacjent.Dowiedz_sie_wiecej_na_temat_COVID_19:
+                        Console.Clear();
+                        
+                        cov19.printInfo();
+                       
                         break;
                     case Pacjent.Obecne_obostrzenia:
+                        Console.Clear();
+                       obostrzenia.printInfo();
+                            
+                        
                         break;
                     case Pacjent.Wyjdź:
                         k = false;
@@ -428,6 +468,9 @@ namespace PROJEKT
                 switch (start)
                 {
                     case Lekarz.Zostaw_wiadomość_administratorowi:
+                        new addText().adding();
+
+
                         break;
                     case Lekarz.Wejdź_do_czatu:
                         while (true)

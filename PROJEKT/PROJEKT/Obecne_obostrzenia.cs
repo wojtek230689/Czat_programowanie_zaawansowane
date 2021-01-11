@@ -1,6 +1,6 @@
 ﻿namespace PROJEKT
 {
-    internal class Obecne_obostrzeżenia
+    internal class Obecne_obostrzenia
     {
         public string ograniczenia = "1,5 METRA – MINIMALNA ODLEGŁOŚĆ MIĘDZY PIESZYMI";
         public string maseczki = "Zasłanianie ust i nosa w miejscach publicznych jest obowiązkowe w całym kraju.";
@@ -12,7 +12,7 @@
         public string seniorzy = "Od poniedziałku do piątku w godzinach 10:00 – 12:00 w sklepie, drogerii, aptece oraz na poczcie mogą przebywać wyłącznie osoby powyżej 60. roku życia.";
 
 
-        internal void printInfo()
+        public void printInfo()
         {
             System.Console.WriteLine();
             System.Console.WriteLine();
@@ -39,7 +39,7 @@
             System.Console.WriteLine();
             System.Console.WriteLine("*Seniorzy: " + seniorzy);
             System.Console.WriteLine();
-            System.Console.WriteLine("Aby wrócić do głównego menu wciśnij dowolny klawisz");
+            
 
         }
 

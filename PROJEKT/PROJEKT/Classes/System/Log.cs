@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PROJEKT.Classes.Business;
 using PROJEKT.Classes.Exceptions;
 
 namespace PROJEKT.Classes.System
@@ -48,6 +49,11 @@ namespace PROJEKT.Classes.System
                     Print($"[{FullName}]",true,a_eLevel);
                 }
             }
+        }
+
+        internal static object DEB(Text text, object fILNAME)
+        {
+            throw new NotImplementedException();
         }
 
         public string FullName => $"{m_sClassName}::{m_sFuncName}";

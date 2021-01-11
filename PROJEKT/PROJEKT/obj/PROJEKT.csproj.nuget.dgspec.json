@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wojtek\\Desktop\\projekt programowanie zaaawansowan\\Czat_programowanie_zaawansowane\\Czat_programowanie_zaawansowane\\PROJEKT\\PROJEKT\\PROJEKT.csproj": {}
+    "C:\\Users\\Wojtek\\Desktop\\Czat_programowanie_zaawansowane-master\\PROJEKT\\PROJEKT\\PROJEKT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wojtek\\Desktop\\projekt programowanie zaaawansowan\\Czat_programowanie_zaawansowane\\Czat_programowanie_zaawansowane\\PROJEKT\\PROJEKT\\PROJEKT.csproj": {
+    "C:\\Users\\Wojtek\\Desktop\\Czat_programowanie_zaawansowane-master\\PROJEKT\\PROJEKT\\PROJEKT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wojtek\\Desktop\\projekt programowanie zaaawansowan\\Czat_programowanie_zaawansowane\\Czat_programowanie_zaawansowane\\PROJEKT\\PROJEKT\\PROJEKT.csproj",
+        "projectUniqueName": "C:\\Users\\Wojtek\\Desktop\\Czat_programowanie_zaawansowane-master\\PROJEKT\\PROJEKT\\PROJEKT.csproj",
         "projectName": "PROJEKT",
-        "projectPath": "C:\\Users\\wojtek\\Desktop\\projekt programowanie zaaawansowan\\Czat_programowanie_zaawansowane\\Czat_programowanie_zaawansowane\\PROJEKT\\PROJEKT\\PROJEKT.csproj",
-        "packagesPath": "C:\\Users\\wojtek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wojtek\\Desktop\\projekt programowanie zaaawansowan\\Czat_programowanie_zaawansowane\\Czat_programowanie_zaawansowane\\PROJEKT\\PROJEKT\\obj\\",
+        "projectPath": "C:\\Users\\Wojtek\\Desktop\\Czat_programowanie_zaawansowane-master\\PROJEKT\\PROJEKT\\PROJEKT.csproj",
+        "packagesPath": "C:\\Users\\Wojtek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Wojtek\\Desktop\\Czat_programowanie_zaawansowane-master\\PROJEKT\\PROJEKT\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\wojtek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Wojtek\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -30,6 +30,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,6 +42,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -56,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

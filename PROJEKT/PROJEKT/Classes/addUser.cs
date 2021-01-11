@@ -84,5 +84,61 @@ namespace PROJEKT.Classes
 
         }
 
+
+        public void deleting()
+        {
+            string login;
+            UserList _oLista = new UserList();
+
+            User sublist = new User();
+
+            UserList sublistuser = new UserList();
+
+            if (File.Exists(@"baza_uzytkownikow.xml"))
+            {
+                _oLista.LoadFromXml(@"baza_uzytkownikow.xml");
+
+            }
+            else
+            {
+                Console.WriteLine("Błąd wczytywania bazy danych przy próbie usuwania użytkownika");
+            }
+
+            bool status= true;
+
+
+            do 
+            {
+                Console.WriteLine("Podaj login do usunięcia: ");
+                login = Console.ReadLine().ToLower();
+
+                if (_oLista.Collection.Exists(x => x.Login == login))
+                {
+                    int i = _oLista.Collection.FindIndex(x=> x.Login == login);
+
+
+                    for (int j = 0; j <=0; j++)
+                    {
+                        _oLista.Collection.RemoveAt(i);
+                        Console.WriteLine(i);
+                        i++;
+
+
+                    }
+
+
+                    _oLista.SaveAsXml(@"baza_uzytkownikow.xml");
+
+
+                    status = false;
+                }
+
+
+
+            } while (status) ;
+
+        }
+        
+     
     }
 }
